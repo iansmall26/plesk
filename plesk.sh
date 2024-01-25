@@ -4,7 +4,7 @@
 log_file="/var/log/install.log"
 
 # Email configuration
-recipient_email="ian@cloudoon.com"
+recipient_email="ian@cloudoon.com,info@cloudpap.com,ian@truehost.cloud"
 email_subject="Plesk Installation Information"
 
 # Log file for email status
