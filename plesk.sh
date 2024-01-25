@@ -4,16 +4,19 @@
 log_file="/var/log/install.log"
 
 # Email configuration
-recipient_email="info@truehost.cloud"
+recipient_email="ian@cloudoon.com"
 email_subject="Plesk Installation Information"
+
+# Log file for email status
+email_log_file="/var/log/email.log"
 
 # Function to extract content and send email
 extract_and_send_content() {
   # Extract content between "Congratulations!" and the ending sentence
   content=$(sed -n '/Congratulations!/,/If you would like to migrate your subscriptions/p' "$log_file")
 
-  # Send email with content
-  echo -e "$content" | mailx -s "$email_subject" "$recipient_email"
+  # Send email with content and log the output
+  echo -e "$content" | mailx -s "$email_subject" "$recipient_email" >> "$email_log_file" 2>&1
 }
 
 # Check for the "Congratulations!" sentence continuously
