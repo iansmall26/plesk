@@ -16,7 +16,12 @@ extract_and_send_content() {
   content=$(sed -n '/Congratulations!/,/If you would like to migrate your subscriptions/p' "$log_file")
 
   # Send email with content and log the output
-  echo -e "$content" | mailx -s "$email_subject" "$recipient_email" >> "$email_log_file" 2>&1
+  if echo -e "$content" | mailx -s "$email_subject" "$recipient_email" >> "$email_log_file" 2>&1; then
+    echo "$(date): $recipient_email have received the emails successfully." >> "$email_log_file"
+  else
+    error=$(tail -n 1 "$email_log_file")
+    echo "$(date): The emails were not sent successfully. Error: $error" >> "$email_log_file"
+  fi
 }
 
 # Check for the "Congratulations!" sentence continuously
@@ -27,3 +32,4 @@ while true; do
   fi
   sleep 10  # Adjust the sleep interval as needed
 done
+
