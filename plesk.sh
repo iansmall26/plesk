@@ -4,7 +4,7 @@
 log_file="/var/log/install.log"
 
 # Email configuration
-recipient_email="cloudpapke@gmail.com"
+recipient_email="info@truehost.cloud"
 email_subject="Plesk Installation Information"
 
 # Function to extract content and send email
